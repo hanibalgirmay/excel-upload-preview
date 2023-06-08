@@ -54,7 +54,12 @@ FileUpload.init({
 }, {
     timestamps: true,
     sequelize: sequelizeConnection,
-    paranoid: true
+    paranoid: true,
+    modelName: 'ExcelFiles'
 })
+
+sequelizeConnection.sync()
+    .then(() => console.log("tabel is created succcessfuly"))
+    .catch(() => console.log("unable to create table"))
 
 export default FileUpload;
