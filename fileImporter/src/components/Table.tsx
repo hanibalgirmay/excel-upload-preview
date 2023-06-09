@@ -11,7 +11,12 @@ interface DataType {
 }
 
 const columns: ColumnsType<DataType> = [
-  { title: "Description", dataIndex: "description", key: "description", render: (t) => t.substring(0,12)  },
+  {
+    title: "Description",
+    dataIndex: "description",
+    key: "description",
+    render: (t) => t.substring(0, 12),
+  },
   Table.EXPAND_COLUMN,
   { title: "Rate", dataIndex: "rate", key: "rate" },
   // Table.SELECTION_COLUMN,
@@ -45,7 +50,7 @@ const data: DataType[] = [
   },
   {
     key: 4,
-    rate:3.2,
+    rate: 3.2,
     amount: 932,
     quantity: "Sydney No. 1 Lake Park",
     description:
@@ -53,12 +58,14 @@ const data: DataType[] = [
   },
 ];
 
-const CustomTable: React.FC = ({data}) => {
-  console.log("table", data)
+const CustomTable: React.FC = ({ data }) => {
+  console.log("table", data);
   return (
     <Table
       columns={columns}
       rowSelection={{}}
+      loading={true}
+      style={{ height: "100%" }}
       expandable={{
         expandedRowRender: (record) => (
           <p style={{ margin: 0 }}>{record.description}</p>
@@ -66,8 +73,7 @@ const CustomTable: React.FC = ({data}) => {
       }}
       dataSource={data}
     />
-  )
-}
-
+  );
+};
 
 export default CustomTable;

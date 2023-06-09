@@ -12,7 +12,7 @@ const MainLayout = ({children}: MainLayoutProps) => {
   } = theme.useToken();
 
   return (
-    <Layout className="full">
+    <Layout style={{height: '100vh'}} className="full">
       <Header
         style={{
           position: "sticky",
@@ -35,9 +35,9 @@ const MainLayout = ({children}: MainLayoutProps) => {
           }))}
         />
       </Header>
-      <Content className="site-layout" style={{ margin: '1rem' ,padding: "0 50px", width:'100%', height:"90%" }}>
+      <Content className="site-layout" style={{ margin: '1rem' ,padding: "0 50px", width:'100%', height:"90%", display:'flex', alignItems:'center' }}>
         <div
-          style={{ padding: 24, minHeight: 380, background: colorBgContainer }}
+          style={{ padding: 24, minHeight: 380, width:'100%', background: colorBgContainer }}
         >
           {children}
         </div>
