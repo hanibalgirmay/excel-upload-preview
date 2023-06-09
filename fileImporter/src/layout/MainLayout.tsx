@@ -35,7 +35,7 @@ const MainLayout = ({children}: MainLayoutProps) => {
           }))}
         />
       </Header>
-      <Content className="site-layout" style={{ margin: '1rem' ,padding: "0 50px", width:'100%', height:"100%" }}>
+      <Content className="site-layout" style={{ margin: '1rem' ,padding: "0 50px", width:'100%', height:"90%" }}>
         <div
           style={{ padding: 24, minHeight: 380, background: colorBgContainer }}
         >
@@ -43,9 +43,9 @@ const MainLayout = ({children}: MainLayoutProps) => {
         </div>
       </Content>
       {/* {children} */}
-      <Footer style={{ position:'absolute', bottom: '0rem', left: '0', right: 0, textAlign: "center" }}>
+      {/* <Footer style={{ position:'absolute', bottom: '0rem', left: '0', right: 0, textAlign: "center" }}>
         Design & Develop by Hanibal G, 2023
-      </Footer>
+      </Footer> */}
     </Layout>
   );
 };
