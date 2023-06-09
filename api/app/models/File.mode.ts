@@ -31,25 +31,25 @@ class FileUpload extends Model<FileModelAttributes, FileModelInput> implements F
 
 FileUpload.init({
     id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
     description: {
-        type: DataTypes.TEXT,
-        allowNull: true
+        type: DataTypes.STRING,
+        allowNull: false
     },
     rate: {
-        type: DataTypes.NUMBER,
-        defaultValue: 0,
+        type: DataTypes.FLOAT,
+        allowNull: false
     },
     quantity: {
-        type: DataTypes.NUMBER,
-        defaultValue: 0,
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     amount: {
-        type: DataTypes.NUMBER,
-        defaultValue: 0,
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     timestamps: true,
@@ -58,8 +58,8 @@ FileUpload.init({
     modelName: 'ExcelFiles'
 })
 
-sequelizeConnection.sync()
-    .then(() => console.log("tabel is created succcessfuly"))
-    .catch(() => console.log("unable to create table"))
+// sequelizeConnection.sync()
+//     .then(() => console.log("tabel is created succcessfuly"))
+//     .catch(() => console.log("unable to create table"))
 
 export default FileUpload;

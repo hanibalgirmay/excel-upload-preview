@@ -16,7 +16,9 @@ router.post('/create', async (req: Request, res: Response) => {
         amount,
         quantity
     }
-    await service.create(_payload);
+    await service.create(_payload).then(res => {
+        return { message: "Data Created Successfully" }
+    }).catch(eer => console.log(eer));
 })
 
 router.put('/update/:id', (req: Request, res: Response) => {

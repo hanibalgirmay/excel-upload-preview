@@ -1,9 +1,12 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
+import cors from 'cors';
+import dataIntialize from './db/init';
 
 import apiRoute from './routes';
 
 dotenv.config();
+dataIntialize();
 const app = express();
 const port = process.env.PORT || 2500;
 console.log(
@@ -15,6 +18,7 @@ console.log(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: "from  server js" })
