@@ -9,7 +9,7 @@ interface FileModelAttributes {
     amount: number;
     createdAt?: Date;
     updatedAt?: Date;
-    deletedAt?: Date;
+    deletedAt?: null;
 }
 
 export interface FileModelInput extends Optional<FileModelAttributes, 'id'> { }
@@ -25,7 +25,7 @@ class FileUpload extends Model<FileModelAttributes, FileModelInput> implements F
     // timestamps!
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
-    public readonly deletedAt!: Date;
+    public readonly deletedAt!: null;
 
 }
 
@@ -57,9 +57,5 @@ FileUpload.init({
     paranoid: true,
     modelName: 'ExcelFiles'
 })
-
-// sequelizeConnection.sync()
-//     .then(() => console.log("tabel is created succcessfuly"))
-//     .catch(() => console.log("unable to create table"))
 
 export default FileUpload;

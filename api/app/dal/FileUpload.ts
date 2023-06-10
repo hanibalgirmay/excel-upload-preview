@@ -32,17 +32,13 @@ export const getById = async (id: number): Promise<FileModelOutput> => {
   return _file;
 };
 
-export const deleteById = async (id: number): Promise<boolean> => {
+export const deleteById = async (id: number) => {
   const deletedIngredientCount = await FileUpload.destroy({
     where: { id },
   });
-  return !!deletedIngredientCount;
+  return deletedIngredientCount;
 };
 
 export const getAll = async () => {
-  return FileUpload.findAll();
-  // where: {
-  //     ...(filters?.isDeleted && {deletedAt: {[Op.not]: null}})
-  // },
-  // ...((filters?.isDeleted || filters?.includeDeleted) && {paranoid: true})
+  return FileUpload.findAll({ where: { deletedAt: null }});
 };

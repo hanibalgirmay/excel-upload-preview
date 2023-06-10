@@ -10,12 +10,6 @@ dotenv.config();
 dataIntialize();
 const app = express();
 const port = process.env.PORT || 2500;
-console.log(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    process.env.DB_HOST,
-    process.env.DB_DRIVER)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,4 +22,10 @@ app.get("/", (req, res) => {
 app.use('/api', apiRoute);
 app.use('/api/upload', uploadRoute);
 
-app.listen(port, () => console.log(`server is running on https://localhost:${port}`))
+app.listen(port, () => {
+    // if(err) {
+    //     console.log('unable to start thr server',err)
+    //     process.exit();
+    // }
+    console.log(`server is running on https://localhost:${port}`)
+}).on('error', console.log)

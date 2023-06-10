@@ -10,7 +10,7 @@ export const update = (id: number, payload: Partial<FileModelInput>): Promise<Fi
 export const getById = (id: number): Promise<FileModelOutput> => {
     return fileDAL.getById(id)
 }
-export const deleteById = (id: number): Promise<boolean> => {
+export const deleteById = (id: number) => {
     return fileDAL.deleteById(id)
 }
 export const getAll = (): Promise<FileModelOutput[]> => {
