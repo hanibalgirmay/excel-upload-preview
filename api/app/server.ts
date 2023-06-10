@@ -4,6 +4,7 @@ import cors from 'cors';
 import dataIntialize from './db/init';
 
 import apiRoute from './routes';
+import uploadRoute from './routes/upload';
 
 dotenv.config();
 dataIntialize();
@@ -25,5 +26,6 @@ app.get("/", (req, res) => {
 })
 // api Router
 app.use('/api', apiRoute);
+app.use('/api/upload', uploadRoute);
 
 app.listen(port, () => console.log(`server is running on https://localhost:${port}`))

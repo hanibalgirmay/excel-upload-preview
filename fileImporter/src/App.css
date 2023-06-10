@@ -1,7 +1,12 @@
 :root{
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .ant-spin-nested-loading {
     height:100% !important;
 }
+
+/* .ant-pagination {
+    margin: 2rem !important;
+    padding: 2rem 0 !important;
+}  */

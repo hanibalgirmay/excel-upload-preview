@@ -7,7 +7,7 @@ import * as XLSX from "xlsx";
 
 const { Dragger } = Upload;
 
-const DragDrop: FC = () => {
+const DragDrop: FC = ({ reload }) => {
   const [excelData, setExcelData] = useState(null);
   const [files, setFiles] = useState<UploadFile[]>([]);
 
@@ -43,7 +43,7 @@ const DragDrop: FC = () => {
     supportServerRender: false,
     accept:
       ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
-    // action: "#",
+    action: "http://localhost:6500/api/upload/create",
     beforeUpload: (file) => {
       const isExcel =
         file.type === "application/vnd.ms-excel" ||
@@ -64,6 +64,7 @@ const DragDrop: FC = () => {
       }
       if (status === "done") {
         message.success(`${info.file.name} file uploaded successfully.`);
+        reload();
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }

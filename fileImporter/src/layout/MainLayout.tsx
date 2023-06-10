@@ -1,10 +1,12 @@
 import { ReactNode, type FC } from "react";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Typography, Layout, theme } from "antd";
 const { Header, Content, Footer } = Layout;
 
 interface MainLayoutProps {
   children: ReactNode
 }
+
+const { Title } = Typography;
 
 const MainLayout = ({children}: MainLayoutProps) => {
   const {
@@ -12,7 +14,7 @@ const MainLayout = ({children}: MainLayoutProps) => {
   } = theme.useToken();
 
   return (
-    <Layout style={{height: '100vh'}} className="full">
+    <Layout style={{minHeight: '100vh'}} className="full">
       <Header
         style={{
           position: "sticky",
@@ -21,11 +23,13 @@ const MainLayout = ({children}: MainLayoutProps) => {
           width: "100%",
           display: "flex",
           alignItems: "center",
-          background: '#fff'
+          background: '#fff',
+          boxShadow: '2px 4px 5px rgba(0,0,0,.1)'
         }}
       >
         <div className="demo-logo" />
-        <Menu
+        <Title level={3}>Upload File</Title>
+        {/* <Menu
           // theme="dark"
           mode="horizontal"
           defaultSelectedKeys={["2"]}
@@ -33,11 +37,11 @@ const MainLayout = ({children}: MainLayoutProps) => {
             key: String(index + 1),
             label: `nav ${index + 1}`,
           }))}
-        />
+        /> */}
       </Header>
-      <Content className="site-layout" style={{ margin: '1rem' ,padding: "0 50px", width:'100%', height:"90%", display:'flex', alignItems:'center' }}>
+      <Content className="site-layout" style={{ margin: '1rem', marginBottom: '5rem',padding: "0 50px", width:'100%', height:"70%", display:'flex', alignItems:'center' }}>
         <div
-          style={{ padding: 24, minHeight: 380, width:'100%', background: colorBgContainer }}
+          style={{ padding: 24, height: '100%', width:'100%', background: colorBgContainer }}
         >
           {children}
         </div>

@@ -10,7 +10,7 @@ const databaseDriver = process.env.DB_DRIVER as Dialect;
 
 const sequelizeConnection = new Sequelize(databaseName, databaseUser, databasePassword, {
     host: databaseHost,
-    port: 3307,
+    port: 3306,
     dialect: databaseDriver,
     dialectOptions: {
         connectTimeout: 60000, // Increase the timeout to 60 seconds

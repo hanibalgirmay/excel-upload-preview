@@ -1,6 +1,11 @@
-import React from "react";
-import { Table } from "antd";
+import React, { useState } from "react";
+import { Table, Pagination } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import {
+  ExpandAltOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+} from "@ant-design/icons";
 
 interface DataType {
   key: React.Key;
@@ -10,69 +15,127 @@ interface DataType {
   description: string;
 }
 
-const columns: ColumnsType<DataType> = [
+
+
+const expandedRowRender = (record) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpand = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <div>
+      <div onClick={handleExpand}>
+        {/* content to display when row is expanded */}
+      </div>
+      {expanded && (
+        <div>
+          {/* additional content to display when row is expanded */}
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+const CustomTable: React.FC = ({ data, onChangeExpand, show, loading }) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
+
+  const onSelectChange = (selectedRowKeys) => {
+    setSelectedRowKeys(selectedRowKeys);
+    setExpandedRowKeys(selectedRowKeys);
+    console.log(selectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
+  const columns: ColumnsType<DataType> = [
   {
     title: "Description",
     dataIndex: "description",
     key: "description",
-    render: (t) => t.substring(0, 12),
+    render: (t) => t.substring(0, 15),
   },
   Table.EXPAND_COLUMN,
   { title: "Rate", dataIndex: "rate", key: "rate" },
   // Table.SELECTION_COLUMN,
+  { title: "Unit", dataIndex: "unit", key: "unit" },
   { title: "Amount", dataIndex: "amount", key: "amount" },
   { title: "Quantity", dataIndex: "quantity", key: "quantity" },
 ];
 
-const data: DataType[] = [
-  {
-    key: 1,
-    rate: 4,
-    amount: 32,
-    quantity: "New York No. 1 Lake Park",
-    description:
-      "My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.",
-  },
-  {
-    key: 2,
-    rate: 4.2,
-    amount: 533,
-    quantity: "London No. 1 Lake Park",
-    description:
-      "My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.",
-  },
-  {
-    key: 3,
-    rate: 2,
-    amount: 229,
-    quantity: "Jiangsu No. 1 Lake Park",
-    description: "This not expandable",
-  },
-  {
-    key: 4,
-    rate: 3.2,
-    amount: 932,
-    quantity: "Sydney No. 1 Lake Park",
-    description:
-      "My name is Joe Black, I am 32 years old, living in Sydney No. 1 Lake Park.",
-  },
-];
+const handleRowSelection = (selectedRowKeys, selectedRow) => {
+  setSelectedRow(selectedRow);
+};
 
-const CustomTable: React.FC = ({ data }) => {
-  console.log("table", data);
+  // const rowSelection = {
+  //   selectedRowKeys,
+  //   onChange: handleRowSelection,
+  // };
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [pageSize, setPageSize] = useState(5);
+  // const [totalRows, setTotalRows] = useState(0);
+
+  const handleToggleShow = () => {
+    onChangeExpand(!show);
+  };
+
   return (
-    <Table
-      columns={columns}
-      rowSelection={{}}
-      loading={true}
-      style={{ height: "100%" }}
-      expandable={{
-        expandedRowRender: (record) => (
-          <p style={{ margin: 0 }}>{record.description}</p>
-        ),
-      }}
-      dataSource={data}
-    />
+    <div style={{overflowY: 'scroll'}}>
+      <div
+        onClick={handleToggleShow}
+        style={{ display: "flex", justifyContent: "flex-end" }}
+      >
+        {!show ? (
+          <FullscreenOutlined
+            size={18}
+            style={{
+              background: "lightgray",
+              cursor: "pointer",
+              padding: ".4rem .6rem",
+              borderRadius: "5px",
+            }}
+          />
+        ) : (
+          <FullscreenExitOutlined
+            size={18}
+            style={{
+              background: "lightgray",
+              cursor: "pointer",
+              padding: ".4rem .6rem",
+              borderRadius: "5px",
+            }}
+          />
+        )}
+      </div>
+      <Table
+        columns={columns}
+        loading={loading}
+        key={"id"}
+        indentSize={5}
+        rowKey="id"
+        rowSelection={rowSelection}
+        style={{ height: "100%", paddingBottom:'3rem' }}
+        expandable={{
+          expandedRowRender: (record) => (
+            <p style={{ margin: 0 }}>{record.description}</p>
+          ),
+          // expandedRowKeys,
+          // onExpand: (expanded, record) => {
+          //   console.log(expanded, record)
+          //   const keys = expanded ? [record.key] : [];
+          //   setExpandedRowKeys(keys);
+          // },
+        }}
+        dataSource={data}
+      />
+      {/* <Pagination {...paginationConfig} /> */}
+    </div>
   );
 };
 
